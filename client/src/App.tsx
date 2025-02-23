@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import HomePage from "@/pages/home";
 import AdminPage from "@/pages/admin";
 
+// Use '/electrician2' as the base path for GitHub Pages
 const basePath = '/electrician2';
 
 function RouterSetup() {
