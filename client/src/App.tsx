@@ -6,20 +6,9 @@ import NotFound from "@/pages/not-found";
 import HomePage from "@/pages/home";
 import AdminPage from "@/pages/admin";
 
-// Get base path from environment variable or default to '/electrician2'
 const basePath = '/electrician2';
 
-// Custom hook to handle base path
-const useBasePath = () => {
-  return (path: string) => {
-    if (path === '/') return basePath || '/';
-    return `${basePath}${path}`;
-  };
-};
-
 function RouterSetup() {
-  const getPath = useBasePath();
-
   return (
     <WouterRouter base={basePath}>
       <Switch>
