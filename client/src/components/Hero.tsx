@@ -5,6 +5,13 @@ import { getBusinessData } from "@/lib/utils";
 import { ArrowRight, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 
+// Function to get full URL with base path
+const getAssetUrl = (path: string) => {
+  // Remove leading slash if present to avoid double slashes
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `/electrician2/${cleanPath}`;
+};
+
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { data: business } = useQuery({
@@ -76,7 +83,7 @@ export function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-black">
-                <Link href={`${slides[currentSlide].link}${searchParams}`}>
+                <Link href={getAssetUrl(slides[currentSlide].link + searchParams)}>
                   Learn More
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>

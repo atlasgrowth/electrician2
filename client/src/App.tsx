@@ -7,7 +7,7 @@ import HomePage from "@/pages/home";
 import AdminPage from "@/pages/admin";
 
 // Get base path from environment variable or default to ''
-const basePath = import.meta.env.BASE_URL || '';
+const basePath = '/electrician2';
 
 // Custom hook to handle base path
 const useBasePath = () => {

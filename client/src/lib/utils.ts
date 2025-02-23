@@ -18,6 +18,13 @@ function safeParseFloat(value: any): number | undefined {
   return undefined;
 }
 
+// Helper function to get asset URLs with base path
+export function getAssetUrl(path: string): string {
+  const basePath = '/electrician2';
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${basePath}/${cleanPath}`;
+}
+
 interface RawBusinessData {
   name: string;
   phone: string;
@@ -77,6 +84,11 @@ export const getBusinessData = async () => {
         reviewer_name: "Customer Review",
         date: new Date().toISOString(),
       }] : undefined,
+      social_media: {
+        facebook: "",
+        instagram: "",
+        reviews_link: data.reviews_link
+      }
     };
 
     const parsed = businessDataSchema.safeParse(normalizedData);
