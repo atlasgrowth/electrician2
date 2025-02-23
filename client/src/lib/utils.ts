@@ -20,7 +20,13 @@ function safeParseFloat(value: any): number | undefined {
 
 // Helper function to get asset URLs with base path
 export function getAssetUrl(path: string): string {
+  // If path is already absolute or external, return as is
+  if (path.startsWith('http') || path.startsWith('https')) {
+    return path;
+  }
+
   const basePath = '/electrician2';
+  // Remove leading slash to avoid double slashes
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
   return `${basePath}/${cleanPath}`;
 }

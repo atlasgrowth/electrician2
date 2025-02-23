@@ -1,16 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { getBusinessData } from "@/lib/utils";
+import { getBusinessData, getAssetUrl } from "@/lib/utils";
 import { ArrowRight, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
-
-// Function to get full URL with base path
-const getAssetUrl = (path: string) => {
-  // Remove leading slash if present to avoid double slashes
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  return `/electrician2/${cleanPath}`;
-};
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -25,19 +18,19 @@ export function Hero() {
       image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=2000",
       title: "Residential Electrical Services",
       subtitle: `${business?.basic_info.name || 'Professional'} residential electrical solutions for your home`,
-      link: "/residential"
+      link: "residential"
     },
     {
       image: "https://images.unsplash.com/photo-1590959651373-a3db0f38c961?auto=format&fit=crop&q=80&w=2000",
       title: "Commercial Electrical Services",
       subtitle: `Powering businesses with ${business?.basic_info.name || 'expert'} commercial solutions`,
-      link: "/commercial"
+      link: "commercial"
     },
     {
       image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=2000",
       title: "Industrial Electrical Services",
       subtitle: `Industrial-grade electrical solutions by ${business?.basic_info.name || 'professionals'}`,
-      link: "/industrial"
+      link: "industrial"
     }
   ];
 
