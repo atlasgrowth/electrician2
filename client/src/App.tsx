@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Router as WouterRouter } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -6,20 +6,35 @@ import NotFound from "@/pages/not-found";
 import HomePage from "@/pages/home";
 import AdminPage from "@/pages/admin";
 
-function Router() {
+// Get base path from environment variable or default to ''
+const basePath = import.meta.env.BASE_URL || '';
+
+// Custom hook to handle base path
+const useBasePath = () => {
+  return (path: string) => {
+    if (path === '/') return basePath || '/';
+    return `${basePath}${path}`;
+  };
+};
+
+function RouterSetup() {
+  const getPath = useBasePath();
+
   return (
-    <Switch>
-      <Route path="/" component={HomePage} />
-      <Route path="/admin" component={AdminPage} />
-      <Route component={NotFound} />
-    </Switch>
+    <WouterRouter base={basePath}>
+      <Switch>
+        <Route path="/" component={HomePage} />
+        <Route path="/admin" component={AdminPage} />
+        <Route component={NotFound} />
+      </Switch>
+    </WouterRouter>
   );
 }
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router />
+      <RouterSetup />
       <Toaster />
     </QueryClientProvider>
   );
